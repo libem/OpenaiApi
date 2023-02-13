@@ -17,12 +17,11 @@ class User(object):
     def __str__(self):
         return "User(id='%s')" % self.id
 
+    def parse_user(user_dict):
+        return User(user_dict['id'], user_dict['username'], user_dict['password'])
 
-# 防数据库用户信息
-users = [
-    User(1, 'user1', 'abcxyz'),
-    User(2, 'user2', 'abcxyz'),
-]
+
+users = [User.parse_user(user) for user in config.users]
 username_table = {u.username: u for u in users}
 userid_table = {u.id: u for u in users}
 
