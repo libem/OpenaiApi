@@ -61,7 +61,8 @@ def request_ask():
     if "q" in data:
         question = data["q"]
         try:
-            answer = chatgpt.get_response(question)
+            cxt = data["cxt"] if "cxt" in data else ""
+            answer = chatgpt.get_response(question, cxt)
             return jsonify(code=0, msg="success", data=answer)
         except Exception as e:
             return jsonify(code=500, msg="error", err=e.args)
